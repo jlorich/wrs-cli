@@ -1,0 +1,64 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+
+
+components:
+  schemas:
+    VxSourceBuild:
+      type: object
+      description: A VxWorks Source Build
+      properties:
+        id:
+          type: string
+          description: The build id (UUID)
+        status:
+          type: enum
+          $ref: '#/components/schemas/VxSourceBuildStatus'
+        message:
+          type: string
+          description: A status message
+    VxSourceBuildStatus:
+      description: The current VxWorks Build (VSB) Status
+      type: string
+      enum:
+        - requested
+        - started
+        - succeeded
+        - failed
+paths:
+  /vx/vsb:
+    post:
+      summary: Start a new VxWorks Source Build (VSB)
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VxSourceBuild"
+  /vx/vsb/{id}/:
+    get:
+      summary: Gets a VxWorks Source Build (VSB) by ID
+      operationId: getBuildById
+      parameters:
+        - name: id
+          in: path
+          description: VxWorks Build ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: "VxWorks Source Build (VSB)"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VxSourceBuild"
+    
+
+
