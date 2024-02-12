@@ -94,7 +94,7 @@ The `extension` component provides the ability to install
 All `wr` commands shall follow the following call structure:
 
 ```
-[wr] [component] [command/alias]+ [--parameter]*
+[wr] [component] [command/alias]+ [--parameter] [--help]*
 ```
 
 | Segment | Purpose |
@@ -103,6 +103,7 @@ All `wr` commands shall follow the following call structure:
 | `[component]` | The name or alias of the component |
 | `[command]` | The command to call within the component. Optionally, these can be nested with multiple subcommands. |
 | `[parameter]` | A paramater to use with the given command. Any number of these can be provided. |
+| `[--help]` | The optional help parameter.  If specified anywhere on the call, the command will [no-op](https://en.wikipedia.org/wiki/NOP_(code)) and only provide relevant documentation for the component or command.
 
 * Parameters*
 
@@ -146,6 +147,9 @@ Parameters may be also be aliased, but shall still require a `--` prefix.  Howev
 >wr vxworks source-build create -n MyProject
 ```
 
+*Default Operation*
+
+The `wr` executable, each component, 
 
 
 *Casing*
