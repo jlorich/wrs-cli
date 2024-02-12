@@ -1,6 +1,6 @@
 {
 	"name": "Markdown Editing",
-	"dockerFile": "Dockerfile",
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:0-bullseye",
 
 	// Configure tool-specific properties.
 	"customizations": {
