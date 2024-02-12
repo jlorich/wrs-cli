@@ -36,19 +36,26 @@ Previously `setup_linux` functioned as a UI-driven global tool installer for Win
 
 #### Commands
 
-##### `wr package list-available`
-Lists packages which are able to be installed
+- `wr package list-available`
+  
+  Lists packages which are able to be installed
 
-##### `wr package list`
-Lists packages installed on the current system.
+- `wr package show --name [package-name]`
 
-##### `wr package add [package-name]`
+  Shows details of the given package
 
-Installs a new package
+- `wr package list`
+  
+  Lists packages installed on the current system.
 
-##### `wr package remove [package-name]'
+- `wr package add --name [package-name]`
+  
+  Installs a new package
 
-Removes a package
+- `wr package remove [package-name]'
+  
+  Removes a previously installed package
+
 
 ### Extensions
 
@@ -58,6 +65,12 @@ The `extension` component of the CLI provides a means to browse, add, and remove
 
 Extensions are *not limited* to interacting with packages installed using the `wr` CLI.  Extensions can be used to interact with existing installations of Wind River edge products, so long as the correct underlying software (and version) is available and the correct configuration (e.g., installation path) is provided.
 
+#### Commands
+
+- `wr extension list-available`
+  
+  Lists pac
+
 
 The `extension` component provides the ability to install 
 
@@ -65,5 +78,81 @@ The `extension` component provides the ability to install
 ### `serve`
 
 ### Common Features
+
+
+
+
+###### Default actions
+
+
+
 ## Components
-## Structure
+
+## Specification
+
+*Call Structure*
+All `wr` commands shall follow the following call structure:
+
+```
+[wr] [component] [command/alias]+ [--parameter]*
+```
+
+| Segment | Purpose |
+| - | - |
+| `[wr]` | The Wind River CLI executable | *required* |
+| `[component]` | The name or alias of the component |
+| `[command]` | The command to call within the component. Optionally, these can be nested with multiple subcommands. |
+| `[parameter]` | A paramater to use with the given command. Any number of these can be provided. |
+
+* Parameters*
+
+All paramaters shall be specified using `--` as a prefix. For example:
+
+```bash
+> wr vx vsb create --name MyProject
+```
+
+Parameters which require array/list input shall use whitespace for delimeters. For example:
+
+```bash
+wr vx vsb create --components INCLUDE_IPTELNETS INCLUDE_SSH
+```
+
+If paramaters need to include a key/value pair, an equal sign may then be used.  For example:
+
+```bash
+wr vx vsb create --components _WRS_CONFIG_BOOST_THREAD=y
+```
+
+*Aliasing*
+
+Commands, components, and paramaters may provide aliases for simplicity.  For example, instead of using `vxworks` for the component that controls VxWorks `vx` can be used.  And in place of `source-build` as the command to control VxWorks Source Builds, `vsb` can be used.  For example, the following commands are equivalent:
+
+```bash
+>wr vx vsb create
+```
+
+```bash
+>wr vxworks source-build create
+```
+
+Parameters may be also be aliased, but shall still require a `--` prefix.  However, an exception is to be made if a single letter alias is being createded for added convenience.  Single letter aliases can use a single `-` prefix.  For example, the following commands are equivalent:
+
+```bash
+>wr vx vsb create --name MyProject
+```
+
+```bash
+>wr vxworks source-build create -n MyProject
+```
+
+
+
+*Casing*
+All package, command, and parameter names shall be in lower [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+
+For example, a command that requires a licens file could use `license-file` as the command name.
+  
+- All command parameters shall be individually specified with a `--` prefix
+
+
