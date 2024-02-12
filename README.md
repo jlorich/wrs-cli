@@ -38,11 +38,11 @@ Previously `setup_linux` functioned as a UI-driven global tool installer for Win
   
   Lists packages installed on the current system.
 
-- `wr package add --name [package-name]`
+- `wr package install --name package-name`
   
   Installs a new package
 
-- `wr package remove [package-name]'
+- `wr package remove --name package-name`
   
   Removes a previously installed package
 
@@ -84,15 +84,15 @@ The license component manages a collection of locally stored license configurati
   
   Lists the available licenses that have been configured for use on this system.
 
-- `wr license show --license-name name`
+- `wr license show --name license-name`
   
   Shows configuration details of the license with the given name
 
-- `wr license add`
+- `wr license add [license-details]`
   
   Adds a new license configuration
 
-- `wr license remove --license-name name`
+- `wr license remove --name license-name`
   
   Removes a license configuration from the current system.
 
@@ -104,17 +104,15 @@ The serve component enables an API server which exposes all functionality of the
 
 #### Commands
 
-- `wr serve`
+- `wr server start [--background]`
 
-  The default command for this operation. `serve` Starts a [Flask](https://flask.palletsprojects.com/en/3.0.x/) API Server, attached to the current terminal and will print output logs until the process is terminated or Ctrl+C is pressed.
+  Starts a [Flask](https://flask.palletsprojects.com/en/3.0.x/) API Server, attached to the current terminal and will print output logs until the process is terminated or Ctrl+C is pressed.
 
-- `wr serve start`
+  If the `--background` parameter is specified, the HTTP server is launched as a background process. This call does not allow for launching multiple servers, and will error if another process is already running.
 
-  Launches the HTTP server as a background process. This call is idemponent and will not launch multiple server instances.
+- `wr server stop`
 
-- `wr serve stop`
-
-  Stops the running HTTP server.
+  Stops a running background instance of the HTTP server.
 
 ## CLI Specification
 
@@ -233,7 +231,7 @@ wr vxworks source-build create -n MyProject
 
 #### Default Operations
 
-Unless otherwise specified (like with the `serve` component), the `wr` executable and each component will by default apply the  `--help` paramater if no command is given.  If a command requires paramaters that are missing, or there is a formatting error of some kind, the error message will be displayed followed by the relevant `--help` response.
+The `wr` executable and each component will by default apply the  `--help` paramater if no command is given.  If a command requires paramaters that are missing, or there is a formatting error of some kind, the error message will be displayed followed by the relevant `--help` response.
 
 
 #### Output Formats
