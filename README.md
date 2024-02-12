@@ -98,9 +98,9 @@ The license component manages a collection of locally stored license configurati
 
   
 
-### Serve
+### HTTP Server
 
-The serve component enables an API server which exposes all functionality of the CLI and extensions over a restful interface.
+The http server component exposes an API which enables all functionality of the CLI and extensions over a restful interface.
 
 #### Commands
 
