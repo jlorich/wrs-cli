@@ -90,6 +90,12 @@ The `extension` component provides the ability to install
 
 ## Specification
 
+
+*Casing*
+All package, command, and parameter names shall be in lower [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+
+For example, a command that requires a licens file could use `license-file` as the command name.
+
 *Call Structure*
 All `wr` commands shall follow the following call structure:
 
@@ -103,7 +109,6 @@ All `wr` commands shall follow the following call structure:
 | `[component]` | The name or alias of the component |
 | `[command]` | The command to call within the component. Optionally, these can be nested with multiple subcommands. |
 | `[parameter]` | A paramater to use with the given command. Any number of these can be provided. |
-| `[--help]` | The optional help parameter.  If specified anywhere on the call, the command will [no-op](https://en.wikipedia.org/wiki/NOP_(code)) and only provide relevant documentation for the component or command.
 
 * Parameters*
 
@@ -123,6 +128,12 @@ If paramaters need to include a key/value pair, an equal sign may then be used. 
 
 ```bash
 wr vx vsb create --components _WRS_CONFIG_BOOST_THREAD=y
+```
+
+When white space as is to be part of paramater input, the value shall be given in single or double quotes.  For example:
+
+```bash
+vr vx vsb create --name "My Project"
 ```
 
 *Aliasing*
@@ -151,12 +162,5 @@ Parameters may be also be aliased, but shall still require a `--` prefix.  Howev
 
 The `wr` executable, each component, 
 
-
-*Casing*
-All package, command, and parameter names shall be in lower [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
-
-For example, a command that requires a licens file could use `license-file` as the command name.
-  
-- All command parameters shall be individually specified with a `--` prefix
-
+| `[--help]` | The optional help parameter.  If specified anywhere on the call, the command will [no-op](https://en.wikipedia.org/wiki/NOP_(code)) and only provide relevant documentation for the component or command.
 
